@@ -9,7 +9,7 @@ public class DeviceTypeRepository {
     public DeviceTypeRepository() {
         deviceTypes.add(new DeviceType(1, "TV"));
         deviceTypes.add(new DeviceType(2, "A/C"));
-        deviceTypes.add(new DeviceType(3, "PC"));
+        deviceTypes.add(new DeviceType(3, "Bass Amp"));
         deviceTypes.add(new DeviceType(4, "Fridge"));
         deviceTypes.add(new DeviceType(5, "Fan"));
     }
