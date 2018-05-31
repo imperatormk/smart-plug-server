@@ -3,12 +3,15 @@ package com.fiktac.SmartPlugApp.slot;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fiktac.SmartPlugApp.device_type.DeviceType;
 import com.fiktac.SmartPlugApp.meter.Meter;
-import com.fiktac.SmartPlugApp.device.Device;
+import com.fiktac.SmartPlugApp.state.State;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Slot implements Serializable {
@@ -21,35 +24,33 @@ public class Slot implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long slotId;
 
-    private Long totalState;
+    @OneToMany(mappedBy="slot")
+    private List<State> states = new ArrayList<>();
     private Date lastUpdated = new Date();
 
-    @OneToOne(mappedBy="slot")
-    private Device device;
+    private Integer deviceType;
 
     public Long getId() {
         return this.slotId;
     }
-    public Long getTotalState() {
-        return this.totalState;
-    }
+    public List<State> getStates() { return this.states; }
     public Date getLastUpdated() {
         return this.lastUpdated;
     }
     public Meter getMeter() {
         return this.meter;
     }
-    public Device getDevice() { return this.device; }
+    public Integer getDeviceType() { return this.deviceType; }
 
     public void setId(Long id) {
         this.slotId = id;
     }
-    public void setTotalState(Long totalState) {
-        this.totalState = totalState;
+    public void setStates(List<State> states) {
+        this.states = states;
     }
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
     public void setMeter(Meter meter) { this.meter = meter; }
-    public void setDevice(Device device) { this.device = device; }
+    public void setDeviceType(Integer deviceType) { this.deviceType = deviceType; }
 }
